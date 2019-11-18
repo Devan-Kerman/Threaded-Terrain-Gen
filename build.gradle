@@ -1,0 +1,22 @@
+plugins {
+    id 'java'
+}
+
+group 'net.devtech'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    //https://github.com/JaanJanno/libjsimplex
+    compile files('libs/libjsimplex.jar')
+    // gpu
+    compile group: 'com.aparapi', name: 'aparapi', version: '1.10.0'
+
+}
