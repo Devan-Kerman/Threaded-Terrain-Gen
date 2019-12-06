@@ -1,7 +1,7 @@
-package net.devtech.benchmarking;
+package net.devtech;
 
-import ee.jjanno.libjsimplex.noise.gpu.SimplexNoiseGpu2D;
 import net.devtech.biome.BiomeGen;
+import net.devtech.terrain.SkeletonKernel;
 import java.util.function.IntConsumer;
 
 public class Bench {
@@ -22,13 +22,11 @@ public class Bench {
 	}
 
 	public static void main(String[] args) {
-		BiomeGen gen = new BiomeGen(7, 100);
+		SkeletonKernel gen = new BasicKernel(7, 100);
 		System.out.println("=== CPU biome generation ===");
 		benchmark(i -> gen.genCPU(100, 100));
-		System.out.println("=== GPU biome generation ===");
-		benchmark(i -> gen.genGPU(100, 100));
-		System.out.println("=== GPU terrain generation ===");
-		SimplexNoiseGpu2D.calculate(0, 0, 100, 100, 10);
+		System.out.println("=== GPU biome & biome generation ===");
+		benchmark(i -> gen.execute(100*100));
 
 		//System.out.println(Arrays.toString(gen.getMap()));
 		//benchmark(i -> gen.getBiome(i, i));

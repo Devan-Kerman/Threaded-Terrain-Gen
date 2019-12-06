@@ -28,7 +28,7 @@ public abstract class BiomeGen extends Kernel {
 		biomeMap = new int[regionSize * regionSize];
 	}
 
-	private int getBiome(int x, int y) {
+	private int computeBiome(int x, int y) {
 		int rx = x >> power;
 		int ry = y >> power;
 
@@ -95,7 +95,7 @@ public abstract class BiomeGen extends Kernel {
 	}
 
 	protected int biome(int index, int x, int y) {
-		return biomeMap[index] = getBiome(currX + x, currY + y);
+		return biomeMap[index] = computeBiome(currX + x, currY + y);
 	}
 
 	public void set(int x, int y) {
@@ -110,7 +110,7 @@ public abstract class BiomeGen extends Kernel {
 	public int[] genCPU(int x, int y) {
 		for (int i = 0; i < regionSize; i++)
 			for (int i1 = 0; i1 < regionSize; i1++)
-				biomeMap[i * regionSize + i1] = getBiome(x + i, y + i1);
+				biomeMap[i * regionSize + i1] = computeBiome(x + i, y + i1);
 		return biomeMap;
 	}
 

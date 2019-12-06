@@ -1,6 +1,5 @@
 package net.devtech;
 
-import ee.jjanno.libjsimplex.generator.NoiseSurface;
 import ee.jjanno.libjsimplex.util.colorizer.ColorMapper;
 import net.devtech.biome.BiomeGen;
 import net.devtech.terrain.SkeletonKernel;
@@ -19,19 +18,7 @@ public class TerrainGenerator {
 			mapper.addRange(-1 + i * 0.1f, -1 + i * 0.1f + 0.1f, new Color(127, 127, 127), new Color(255, 255, 255), 1);
 		}
 
-		SkeletonKernel kernel = new SkeletonKernel(5, width) {
-			@Override
-			protected int getBiomeIndex(int biome_id, int x, int y) {
-				return biome_id & 1;
-			}
-
-			@Override
-			protected float heightPostProcess(int x, int y, int biomeIndex, float elevation) {
-				if(biomeIndex == 0)
-					return elevation*.25f;
-				return elevation;
-			}
-		};
+		SkeletonKernel kernel = new BasicKernel(5, width);
 
 		kernel.set(0, 0);
 		kernel.execute(width*width);
